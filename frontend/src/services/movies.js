@@ -1,32 +1,36 @@
 import axios from "axios";
 
 class MovieDataService {
+    constructor() {
+        this.api_url = "https://moviereviewsmern-lxb4nke5.b4a.run/api/v1/movies";
+    }
+
     getAll(page = 0) {
-        return axios.get(`http://localhost:5000/api/v1/movies?page=${page}`);
+        return axios.get(`${this.api_url}?page=${page}`);
     }
 
     get(id) {
-        return axios.get(`http://localhost:5000/api/v1/movies/id/${id}`);
+        return axios.get(`${this.api_url}/id/${id}`);
     }
 
     find(query, by = "title", page = 0) {
-        return axios.get(`http://localhost:5000/api/v1/movies?${by}=${query}&page=${page}`);
+        return axios.get(`${this.api_url}?${by}=${query}&page=${page}`);
     }
 
     createReview(data) {
-        return axios.post(`http://localhost:5000/api/v1/movies/review`, data);
+        return axios.post(`${this.api_url}/review`, data);
     }
 
     updateReview(data) {
-        return axios.put(`http://localhost:5000/api/v1/movies/review`, data);
+        return axios.put(`${this.api_url}/review`, data);
     }
 
     deleteReview(id, userId) {
-        return axios.delete("http://localhost:5000/api/v1/movies/review/", {data: {review_id:id, user_id: userId}});
+        return axios.delete(`${this.api_url}/review/`, {data: {review_id:id, user_id: userId}});
     }
 
     getRatings() {
-        return axios.get("http://localhost:5000/api/v1/movies/ratings");
+        return axios.get(`${this.api_url}/ratings`);
     }
 };
 
